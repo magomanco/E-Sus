@@ -3,6 +3,8 @@ MAINTAINER "Mauricio" <dalemanco@gmail.com>
 
 RUN yum -y install \
         wget \
+        systemd \
+        dbus \
         postgresql \
     && yum clean all \
     && rm -rf /var/cache/yum
