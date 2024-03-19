@@ -20,7 +20,7 @@ EXPOSE 8090
 VOLUME /opt/e-SUS1/
 
 ENV APP_DB_URL=jdbc:postgresql://localhost:5431/esus1
-ENV APP_DB_USER=postgres
-ENV APP_DB_PASSWORD=esus
+ENV APP_DB_USER=usuario
+ENV APP_DB_PASSWORD=senha
 
 CMD ["/usr/lib/jvm/jdk-18.0.1.1/bin/java", "-jar", "/opt/e-SUS1/your-app.jar"]
