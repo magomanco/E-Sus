@@ -1,0 +1,24 @@
+FROM centos/systemd
+MAINTAINER "Mauricio" <dalemanco@gmail.com>
+
+RUN yum -y install \
+        wget \
+        postgresql \
+    && yum clean all \
+    && rm -rf /var/cache/yum
+
+RUN wget -O /tmp/openjdk-18.0.1.1_linux-x64_bin.tar.gz https://download.java.net/java/GA/jdk18.0.1.1/65ae32619e2f40f3a9af3af1851d6e19/2/GPL/openjdk-18.0.1.1_linux-x64_bin.tar.gz \
+    && mkdir -p /usr/lib/jvm/ \
+    && tar zxvf /tmp/openjdk-18.0.1.1_linux-x64_bin.tar.gz -C /usr/lib/jvm/ \
+    && rm /tmp/openjdk-18.0.1.1_linux-x64_bin.tar.gz \
+    && update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-18.0.1.1/bin/java 1065
+
+EXPOSE 8090
+
+VOLUME /opt/e-SUS1/
+
+ENV APP_DB_URL=jdbc:postgresql://localhost:5431/esus1
+ENV APP_DB_USER=postgres
+ENV APP_DB_PASSWORD=esus
+
+CMD ["/usr/lib/jvm/jdk-18.0.1.1/bin/java", "-jar", "/opt/e-SUS1/your-app.jar"]
